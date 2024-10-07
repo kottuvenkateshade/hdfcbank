@@ -1,0 +1,82 @@
+somu 1k
+suresh 2k
+veeru 5k
+ganesh 3k
+anji  5k
+
+
+Locally redundant
+
+
+kottuvenkatesh@hotmail.com
+Kottu@123
+
+
+https://web.azuresynapse.net
+
+
+
+
+SELECT 
+    *,
+    CASE 
+        WHEN LAG(sales_amount) OVER (ORDER BY sales_date) = sales_amount THEN 1 
+        ELSE 0 
+    END AS is_equal
+FROM 
+    sales;
+	
+	
+	
+
+Batch Load: Periodically loads data in bulk, typically on a scheduled basis. (.mode("append")) appending data to existing dataframe.
+            Loading daily/weekly/monthly sales records into Databricks.
+			
+Full Load: Loads the entire dataset, usually overwriting the existing data.(.mode("overwrite")
+           Full refresh of a database table or data lake.
+		   
+Delta Load/Incremental Load: Loads only the new or changed data since the last load. Often uses timestamps or incremental flags.
+                             Incrementally loading new transactions, updates, or changes (e.g., loading only new sales since last run).
+							 (merge)
+							 
+
+copyinto: In PySpark, the COPY INTO statement is used to load data from an external location(aws S3 Bucket,Azure Storage etc) into a delta table in a Spark SQL-based environment.The COPY INTO statement simplifies the process of bulk loading data into tables from various sources, such as files or external databases.
+							 
+							 
+common steps to Batch,Full,Delta Loads:
+--------------------------------------						 
+Go to Jobs in Databricks and create a new job.
+Select the notebook that contains the full load script (like the one we wrote above).
+Set a schedule (e.g., every day at midnight).
+
+
+df5=df.withColumn('rnk',row_number().over(Window.partitionBy('dept').orderBy(desc('Salary')))).filter(col('rnk')==2)
+
+df6=df.withColumn('rnk',row_number().over(Window.orderBy(desc('Salary')))).filter(col('rnk)==2)
+
+
+
+df=spark.read.text('path')
+df9=df.withColumn('word',explode(split(col('value')," ")).groupBy('word').count()
+
+
+
+
+fact table
+dimension table
+broadcast joins
+what is memory management
+data accumulator
+how to test the pyspark code  (unit testing=actual data=expected data)
+spark job performance tuning techniques
+when to use repartition and colease
+
+
+
+scd type 1 ----> incremental load ---> copy into & merge
+
+
+
+Fact table: it can maintain the keys and measures.
+
+Dimesion Table: it can describles about data about data.
